@@ -1,0 +1,77 @@
+{
+    "settings": {
+        "analysis": {
+            "analyzer": {
+                "buddhism_a": {
+                    "type":      "ik_max_word",
+                    "stopwords": "_english_"
+                },
+				"autocomplete": {
+		            "type":      "custom",
+		            "tokenizer": "standard",
+		            "filter": [
+		                "lowercase",
+		                "autocomplete_filter"
+		            ]
+		        }
+            },
+            "filter": {
+                "autocomplete_filter": {
+                    "type":     "edge_ngram",
+                    "min_gram": 1,
+                    "max_gram": 20
+                }
+            }
+        }
+    },
+    "mappings": {
+    	"dynamic": true,
+    	"properties": {
+    		"work_id": {
+    			"type": "keyword",
+    			"ignore_above": 32,
+    			"include_in_all": false
+    		},
+    		"title": {
+    			"type": "text",
+    			"analyzer": "buddhism_a",
+                "include_in_all": false
+    		},
+    		"creator": {
+    			"type": "text",
+    			"analyzer": "buddhism_a",
+                "include_in_all": false
+    		},
+    		"creator_variant": {
+    			"type": "text",
+    			"analyzer": "buddhism_a",
+                "include_in_all": false
+    		},
+    		"vol_id": {
+    			"type": "text",
+    			"analyzer": "buddhism_a",
+                "include_in_all": false
+    		},
+    		"category": {
+				"type": "keyword",
+				"ignore_above": 32,
+				"include_in_all": false
+    		},
+    		"sutra_body": {
+    			"type": "text",
+    			"analyzer": "buddhism_a",
+                "include_in_all": true,
+                "fields": {
+	            "cn": {
+	              "type": "text",
+	              "analyzer": "buddhism_a"
+	            },
+	            "en": {
+	              "type": "text",
+	              "analyzer": "english"
+	            }
+          }
+    		}
+    	}
+    }
+}
