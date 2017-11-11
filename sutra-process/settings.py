@@ -10,3 +10,4 @@ password = 'secret'
 # elastic search settings
 es_index = 'tripitaka'
 es_type = 'sutra'
+es_type_suggest = 'suggest'
