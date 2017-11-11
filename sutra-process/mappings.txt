@@ -1,0 +1,79 @@
+{
+    "settings": {
+        "analysis": {
+           "filter": {
+                "autocomplete_filter": {
+                    "type":     "edge_ngram",
+                    "min_gram": 1,
+                    "max_gram": 20
+                }
+            },
+            "analyzer": {
+				"autocomplete": {
+                    "type":      "custom",
+                    "tokenizer": "standard",
+		            "filter": [
+		                "autocomplete_filter"
+		            ]
+		        }
+            }
+        }
+    },
+    "sutra": {
+        "mappings": {
+                "dynamic": true,
+                "properties": {
+                    "work_id": {
+                        "type": "keyword",
+                        "ignore_above": 32,
+                        "include_in_all": false
+                    },
+                    "vol_id": {
+                        "type": "text",
+                        "ignore_above": 32,
+                        "include_in_all": false
+                    },
+                    "category": {
+                        "type": "keyword",
+                        "ignore_above": 32,
+                        "include_in_all": false
+                    },
+                    "title": {
+                        "type": "text",
+                        "include_in_all": false,
+                        "analyzer": "ik_max_word"
+                    },
+                    "creator": {
+                        "type": "text",
+                        "include_in_all": false,
+                        "analyzer": "ik_max_word"
+                    },
+                    "creator_variant": {
+                        "type": "text",
+                        "include_in_all": false,
+                        "analyzer": "ik_max_word"
+                    },
+                    "content": {
+                        "type": "text",
+                        "include_in_all": true,
+                        "analyzer": "ik_max_word"
+                    }
+                }
+        }
+    },
+    "suggest": {
+        "mappings": {
+            "dynamic": true,
+            "properties": {
+                "term": {
+                    "type": "text",
+                    "search_analyzer": "standard",
+                    "index_analyzer": "autocomplete"
+                },
+                "count": {
+                    "type": "keyword"
+                }
+            }
+        }
+    }
+}
